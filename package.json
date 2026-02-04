@@ -1,11 +1,19 @@
 {
   "name": "n8n-nodes-teman-insight",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Official n8n community node for Teman Insight. Get your API free at app.temaninsight.com — sign up, add your knowledge. Let Your knowledge, working for you.",
   "license": "MIT",
   "homepage": "https://temaninsight.com",
-  "keywords": ["n8n-community-node-package", "n8n", "teman-insight", "ai"],
-  "author": { "name": "Teman Data", "email": "contact@temandata.com" },
+  "keywords": [
+    "n8n-community-node-package",
+    "n8n",
+    "teman-insight",
+    "ai"
+  ],
+  "author": {
+    "name": "Teman Data",
+    "email": "contact@temandata.com"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/teman-data/n8n-nodes-teman-insight.git"
@@ -19,12 +27,18 @@
     "release": "n8n-node release",
     "prepublishOnly": "n8n-node prerelease"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "n8n": {
     "n8nNodesApiVersion": 1,
     "strict": false,
-    "credentials": ["dist/credentials/TemanInsightApi.credentials.js"],
-    "nodes": ["dist/nodes/TemanInsight/TemanInsight.node.js"]
+    "credentials": [
+      "dist/credentials/TemanInsightApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/TemanInsight/TemanInsight.node.js"
+    ]
   },
   "devDependencies": {
     "@n8n/node-cli": "*",
@@ -33,5 +47,7 @@
     "release-it": "^19.0.4",
     "typescript": "^5.9.2"
   },
-  "peerDependencies": { "n8n-workflow": "*" }
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  }
 }

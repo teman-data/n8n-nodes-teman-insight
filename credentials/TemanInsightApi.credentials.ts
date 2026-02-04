@@ -1,6 +1,5 @@
 import type {
 	IAuthenticateGeneric,
-	ICredentialTestRequest,
 	ICredentialType,
 	Icon,
 	INodeProperties,
@@ -32,15 +31,6 @@ export class TemanInsightApi implements ICredentialType {
 				'api-key': '={{ $credentials.apiKey }}',
 				'Content-Type': 'application/json',
 			},
-		},
-	};
-
-	test: ICredentialTestRequest = {
-		request: {
-			baseURL: 'https://api.temaninsight.com',
-			url: '/api/public/partners/knowledgebases/ask',
-			method: 'POST',
-			body: { message: 'Hello' },
 		},
 	};
 }
