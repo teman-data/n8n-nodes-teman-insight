@@ -9,7 +9,8 @@ export class TemanInsight implements INodeType {
 		version: 1,
 		usableAsTool: true,
 		subtitle: '=Ask: {{ $parameter.message }}',
-		description: 'Tanya knowledge base Teman Insight (POST /api/public/partners/knowledgebases/ask)',
+		description:
+			'Let your knowledge work for you. Query your Teman Insight knowledge base from n8n. Get your API free at app.temaninsight.com.',
 		defaults: {
 			name: 'Teman Insight',
 		},
@@ -34,8 +35,8 @@ export class TemanInsight implements INodeType {
 				type: 'string',
 				default: '',
 				required: true,
-				description: 'Pertanyaan yang ingin dikirim ke knowledge base',
-				placeholder: 'e.g. Hallo, can you explain me what you can do?',
+				description: 'Your question to the knowledge base',
+				placeholder: 'e.g. Hello, what can you help me with?',
 				routing: {
 					request: {
 						method: 'POST',
@@ -43,6 +44,14 @@ export class TemanInsight implements INodeType {
 						body: {
 							message: '={{ $value }}',
 						},
+					},
+					output: {
+						postReceive: [
+							{
+								type: 'rootProperty',
+								properties: { property: 'data' },
+							},
+						],
 					},
 				},
 			},
@@ -52,7 +61,7 @@ export class TemanInsight implements INodeType {
 				type: 'string',
 				default: '',
 				description:
-					'Opsional. Identifier chatroom. Isi jika ingin konteks percakapan sama (mis. dari response sebelumnya). Di awal percakapan bisa dikosongkan.',
+					'Optional. Session ID from a previous response to keep the same conversation context. Leave empty for a new conversation.',
 				routing: {
 					request: {
 						body: {
