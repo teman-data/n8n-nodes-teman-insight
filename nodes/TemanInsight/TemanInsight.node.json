@@ -1,0 +1,10 @@
+{
+  "node": "n8n-nodes-base.TemanInsight",
+  "nodeVersion": "1.0",
+  "codexVersion": "1.0",
+  "categories": ["Artificial Intelligence"],
+  "resources": {
+    "credentialDocumentation": [{ "url": "https://docs.temaninsight.com/auth" }],
+    "primaryDocumentation": [{ "url": "https://docs.temaninsight.com" }]
+  }
+}
