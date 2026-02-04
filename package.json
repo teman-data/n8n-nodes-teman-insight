@@ -1,7 +1,7 @@
 {
   "name": "n8n-nodes-teman-insight",
   "version": "0.1.0",
-  "description": "n8n community node untuk product AI Teman Insight",
+  "description": "Official n8n community node for Teman Insight. Get your API free at app.temaninsight.com — sign up, add your knowledge. Let Your knowledge, working for you.",
   "license": "MIT",
   "homepage": "https://temaninsight.com",
   "keywords": [
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/temandata/n8n-nodes-teman-insight.git"
+    "url": "https://github.com/teman-data/n8n-nodes-teman-insight.git"
   },
   "scripts": {
     "build": "n8n-node build",

@@ -1,125 +1,38 @@
-# n8n-nodes-teman-insight
+# Teman Insight — n8n Node
 
-Community node n8n untuk **Teman Insight** (product AI kamu). Node ini memungkinkan workflow n8n memanggil API Teman Insight (chat/completion, dll.) lewat node drag-and-drop.
+**Official n8n community node for Teman Insight.**  
+Query your knowledge base from n8n workflows.
 
-## Persyaratan
+Get your API key **free** at **[app.temaninsight.com](https://app.temaninsight.com)** — sign up, add your knowledge, and you’re set.
 
-- Node.js 18+
-- Akun / API key Teman Insight
+**Your knowledge, working for you.**
 
-## Instalasi di n8n
+---
 
-### 1. Install dari npm (setelah publish)
+## How to use
 
-Di n8n: **Settings → Community nodes → Install** → ketik `n8n-nodes-teman-insight`.
+### 1. Get an API key
 
-### 2. Development / test lokal (tanpa publish npm)
+- Go to **[app.temaninsight.com](https://app.temaninsight.com)** → sign up or log in  
+- Set up your knowledge base and get your **API key** (in settings or dashboard)
 
-**Opsi A – Pakai `npm run dev` (paling gampang)**  
-Ini menjalankan n8n sekaligus dengan node ini ter-load. Tidak perlu publish ke npm.
+### 2. Install the node in n8n
 
-```bash
-npm install
-npm run dev
-```
+- In n8n: **Settings** (gear icon) → **Community nodes** → **Install**  
+- Enter: **n8n-nodes-teman-insight** → Install
 
-Tunggu sampai di terminal muncul pesan bahwa n8n siap (biasanya “Editor is now accessible at…”). Lalu buka **http://localhost:5678**. Node **Teman Insight** akan muncul di panel nodes.
+### 3. Use it in a workflow
 
-**Opsi B – Pakai `npm link` (kalau kamu sudah punya n8n terpasang)**  
-Cocok kalau kamu mau pakai n8n yang sudah jalan (misalnya yang biasa dipakai).
+1. Add the **Teman Insight** node to your workflow (search for “Teman Insight” in the node panel).
+2. Click **Create New Credential** → choose **Teman Insight API** → enter your **API Key** → Save.
+3. Fill in **Message** (your question to the knowledge base).
+4. (Optional) **Session ID** — leave empty at first; to keep the same conversation context, use the `session_id` from the previous response.
 
-```bash
-# Di folder project node ini
-npm run build
-npm link
+Done. Run the workflow and the Teman Insight response will appear in the node output.
 
-# Buat folder custom n8n (kalau belum ada), lalu link node
-# Windows: %USERPROFILE%\.n8n\custom
-mkdir "%USERPROFILE%\.n8n\custom" 2>nul
-cd "%USERPROFILE%\.n8n\custom"
-npm init -y
-npm link n8n-nodes-teman-insight
+---
 
-# Jalankan n8n seperti biasa
-npx n8n
-```
+## Need help?
 
-Lalu buka http://localhost:5678. Node Teman Insight akan muncul karena ter-install dari link lokal.
-
-### 3. Cara test (step-by-step)
-
-1. **Jalankan n8n dengan node ini**
-   ```bash
-   npm run dev
-   ```
-2. **Buka n8n** di browser: http://localhost:5678 (login/signup jika diminta).
-3. **Buat workflow baru** → tambah node (klik + atau drag).
-4. **Cari node** "Teman Insight" di panel kiri, tambahkan ke canvas.
-5. **Buat credential:** di node Teman Insight pilih "Create New Credential" → **Teman Insight API** → isi **API Key** → simpan.
-6. **Isi Message** (mis. `Hallo, can you explain me what you can do?`). Session ID bisa dikosongkan.
-7. **Klik "Test step"** atau **Execute workflow** → cek output; response API akan muncul di node.
-
-Kalau build/run dari CLI sudah jalan, setiap ubah code bisa jalankan lagi `npm run build` lalu refresh n8n; atau biarkan `npm run dev` (mode watch) supaya rebuild otomatis.
-
-### 4. Install manual di self-hosted
-
-```bash
-# Di folder custom nodes n8n (misal ~/.n8n/custom atau N8N_CUSTOM_EXTENSIONS)
-npm init -y
-npm install n8n-nodes-teman-insight
-```
-
-## Konfigurasi
-
-1. Tambah node **Teman Insight** ke workflow.
-2. Buat credential **Teman Insight API** (Settings → Credentials): isi **API Key**.
-3. Isi **Message** (pertanyaan ke knowledge base). Opsional: **Session ID** untuk melanjutkan konteks percakapan (isi setelah dapat `session_id` dari response pertama).
-
-**Endpoint:** `POST https://api.temaninsight.com/api/public/partners/knowledgebases/ask`  
-**Header:** `Content-Type: application/json`, `api-key: <API Key>`  
-**Body:** `{ "message": "...", "session_id": "..." }` (session_id opsional).
-
-## Scripts
-
-| Perintah       | Fungsi                          |
-|----------------|----------------------------------|
-| `npm run build`| Compile node (output ke `dist/`) |
-| `npm run dev`  | Jalankan n8n + node (watch)      |
-| `npm run lint` | Cek & perbaiki lint              |
-| `npm run release` | Build + publish ke npm       |
-
-## Keamanan & siap publish
-
-**Sudah aman dari sisi node:**
-- API key **tidak** disimpan di code; dipakai lewat **Credential** n8n (disimpan terenkripsi oleh n8n).
-- Field API Key di credential pakai `typeOptions: { password: true }` (tersembunyi di UI).
-- Yang ke-publish ke npm hanya folder **dist/** (isi `package.json` → `"files": ["dist"]`); source `.ts` tidak ikut.
-
-**Sebelum publish, pastikan:**
-1. **Jangan commit** API key / secret ke Git. Pakai `.gitignore` (sudah ada: `node_modules/`, `dist/`, `.env`).
-2. **Rotate API key** yang sempat dipakai di chat atau tempat lain; pakai key baru hanya di n8n Credentials.
-3. **Cek lagi** `package.json`: isi `author`, `repository.url`, `homepage` kalau mau (boleh tetap placeholder).
-
-Setelah itu **aman untuk publish**.
-
-## Publish ke npm & daftar verified
-
-1. **Publish ke npm**
-
-   ```bash
-   npm login
-   npm run release
-   ```
-
-2. **Daftar verified di n8n**  
-   Baca [Submit community nodes](https://docs.n8n.io/integrations/creating-nodes/deploy/submit-community-nodes/) dan daftar lewat [n8n Creator Portal](https://creators.n8n.io/nodes).
-
-## Aturan community node
-
-- Nama package: `n8n-nodes-*` atau `@scope/n8n-nodes-*`
-- Keyword: `n8n-community-node-package`
-- Verified nodes: tanpa runtime dependencies, ikuti [technical](https://docs.n8n.io/integrations/creating-nodes/build/reference/verification-guidelines/) dan [UX guidelines](https://docs.n8n.io/integrations/creating-nodes/build/reference/ux-guidelines/)
-
-## Lisensi
-
-MIT
+- Teman Insight docs: [teman-insight.gitbook.io](https://teman-insight.gitbook.io/teman-insight)  
+- Website: [temaninsight.com](https://temaninsight.com)
