@@ -7,6 +7,7 @@ export class TemanInsight implements INodeType {
 		icon: 'file:teman-insight.png',
 		group: ['transform'],
 		version: 1,
+		usableAsTool: true,
 		subtitle: '=Ask: {{ $parameter.message }}',
 		description: 'Tanya knowledge base Teman Insight (POST /api/public/partners/knowledgebases/ask)',
 		defaults: {

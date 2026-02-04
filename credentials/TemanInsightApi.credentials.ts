@@ -1,6 +1,8 @@
 import type {
 	IAuthenticateGeneric,
+	ICredentialTestRequest,
 	ICredentialType,
+	Icon,
 	INodeProperties,
 } from 'n8n-workflow';
 
@@ -9,7 +11,7 @@ export class TemanInsightApi implements ICredentialType {
 
 	displayName = 'Teman Insight API';
 
-	icon = 'file:../nodes/TemanInsight/teman-insight.png';
+	icon: Icon = 'file:../nodes/TemanInsight/teman-insight.png';
 
 	documentationUrl = 'https://teman-insight.gitbook.io/teman-insight';
 
@@ -30,6 +32,15 @@ export class TemanInsightApi implements ICredentialType {
 				'api-key': '={{ $credentials.apiKey }}',
 				'Content-Type': 'application/json',
 			},
+		},
+	};
+
+	test: ICredentialTestRequest = {
+		request: {
+			baseURL: 'https://api.temaninsight.com',
+			url: '/api/public/partners/knowledgebases/ask',
+			method: 'POST',
+			body: { message: 'Hello' },
 		},
 	};
 }
